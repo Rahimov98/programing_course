@@ -2,211 +2,695 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Курс программирования с нуля</title>
-  <meta name="description" content="7 направлений × 24 урока = 168 уроков. Python, JavaScript, C#, C++, PHP, SQL, HTML/CSS.">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Курс программирования</title>
+  <meta name="description" content="7 направлений × 24 урока. Удобно с телефона.">
+  <meta name="theme-color" content="#0b1220">
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <style>
     :root {
-      --bg: #0f1419;
-      --card: #1a2332;
-      --card-hover: #243044;
-      --text: #e7ecf3;
-      --muted: #8b9bb4;
+      --bg: #0b1220;
+      --surface: #121a2b;
+      --surface2: #1a2438;
+      --border: #243049;
+      --text: #e8eef8;
+      --muted: #8b9cb3;
       --accent: #3b82f6;
-      --accent2: #22c55e;
-      --border: #2a3548;
+      --accent-soft: rgba(59, 130, 246, 0.15);
+      --ok: #22c55e;
+      --radius: 14px;
+      --safe-bottom: env(safe-area-inset-bottom, 0px);
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; }
     body {
       font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
       background: var(--bg);
       color: var(--text);
-      line-height: 1.5;
-      min-height: 100vh;
-      padding: 16px;
-      padding-bottom: 48px;
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
     }
-    .wrap {
-      max-width: 480px;
+    .app {
+      max-width: 640px;
       margin: 0 auto;
+      min-height: 100%;
+      display: flex;
+      flex-direction: column;
     }
-    header {
+
+    /* Header */
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(11, 18, 32, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-height: 56px;
+    }
+    .topbar h1 {
+      font-size: 1.05rem;
+      font-weight: 650;
+      flex: 1;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .btn-icon {
+      width: 40px;
+      height: 40px;
+      border: none;
+      border-radius: 10px;
+      background: var(--surface2);
+      color: var(--text);
+      font-size: 1.2rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .btn-icon:active { opacity: 0.75; }
+    .btn-icon.hidden { display: none; }
+
+    /* Screens */
+    .screen { display: none; flex: 1; flex-direction: column; }
+    .screen.active { display: flex; }
+
+    .content {
+      padding: 16px 16px calc(24px + var(--safe-bottom));
+      flex: 1;
+    }
+
+    /* Home */
+    .hero {
       text-align: center;
-      padding: 28px 8px 20px;
+      padding: 12px 8px 20px;
     }
-    header h1 {
-      font-size: 1.55rem;
+    .hero h2 {
+      font-size: 1.45rem;
       font-weight: 700;
       letter-spacing: -0.02em;
     }
-    header p {
+    .hero p {
       color: var(--muted);
-      margin-top: 8px;
+      margin-top: 6px;
       font-size: 0.95rem;
     }
-    .badge {
+    .pill {
       display: inline-block;
       margin-top: 12px;
-      background: #14532d;
+      background: rgba(34, 197, 94, 0.15);
       color: #86efac;
-      font-size: 0.8rem;
+      font-size: 0.78rem;
       font-weight: 600;
-      padding: 4px 12px;
+      padding: 5px 12px;
       border-radius: 999px;
     }
-    .hint {
-      background: var(--card);
+    .tip {
+      background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 12px;
+      border-radius: var(--radius);
       padding: 14px 16px;
-      margin-bottom: 20px;
+      margin-bottom: 18px;
       font-size: 0.9rem;
       color: var(--muted);
     }
-    .hint strong { color: var(--text); }
-    .grid {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-    a.course {
+    .tip strong { color: var(--text); }
+
+    .course-list { display: flex; flex-direction: column; gap: 10px; }
+    .course-card {
       display: flex;
       align-items: center;
       gap: 14px;
-      background: var(--card);
+      background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 16px;
-      text-decoration: none;
+      border-radius: var(--radius);
+      padding: 14px 16px;
+      cursor: pointer;
+      text-align: left;
+      width: 100%;
       color: inherit;
-      transition: background 0.15s, transform 0.15s;
+      font: inherit;
       -webkit-tap-highlight-color: transparent;
+      transition: background 0.12s, transform 0.12s;
     }
-    a.course:active {
-      background: var(--card-hover);
-      transform: scale(0.98);
+    .course-card:active {
+      background: var(--surface2);
+      transform: scale(0.985);
     }
-    .icon {
+    .course-icon {
       width: 48px;
       height: 48px;
       border-radius: 12px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.4rem;
       font-weight: 700;
+      font-size: 0.95rem;
       flex-shrink: 0;
     }
-    .info { flex: 1; min-width: 0; }
-    .info h2 {
-      font-size: 1.1rem;
-      font-weight: 600;
+    .course-card h3 { font-size: 1.05rem; font-weight: 600; }
+    .course-card span { font-size: 0.82rem; color: var(--muted); }
+    .chev { margin-left: auto; color: var(--muted); font-size: 1.15rem; }
+
+    .c-py .course-icon { background: #1e3a5f; color: #60a5fa; }
+    .c-js .course-icon { background: #3d3515; color: #facc15; }
+    .c-web .course-icon { background: #3b1f1f; color: #f87171; }
+    .c-php .course-icon { background: #2e1a4a; color: #c084fc; }
+    .c-sql .course-icon { background: #14332f; color: #2dd4bf; }
+    .c-cs .course-icon { background: #1a2e1a; color: #4ade80; }
+    .c-cpp .course-icon { background: #1a2a4a; color: #93c5fd; }
+
+    /* Lessons */
+    .lesson-list { display: flex; flex-direction: column; gap: 8px; }
+    .lesson-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 13px 14px;
+      cursor: pointer;
+      text-align: left;
+      width: 100%;
+      color: inherit;
+      font: inherit;
+      -webkit-tap-highlight-color: transparent;
     }
-    .info span {
-      font-size: 0.85rem;
-      color: var(--muted);
-    }
-    .arrow {
-      color: var(--muted);
-      font-size: 1.2rem;
-    }
-    .py .icon { background: #1e3a5f; color: #60a5fa; }
-    .js .icon { background: #3d3a1a; color: #facc15; }
-    .web .icon { background: #3b1f1f; color: #f87171; }
-    .php .icon { background: #2e1a4a; color: #c084fc; }
-    .sql .icon { background: #1a3d3a; color: #2dd4bf; }
-    .cs .icon { background: #1a2e1a; color: #4ade80; }
-    .cpp .icon { background: #1a2a4a; color: #93c5fd; }
-    footer {
-      text-align: center;
-      margin-top: 32px;
+    .lesson-item:active { background: var(--surface2); }
+    .lesson-num {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: var(--accent-soft);
+      color: var(--accent);
       font-size: 0.8rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .lesson-item h3 {
+      font-size: 0.95rem;
+      font-weight: 500;
+      line-height: 1.35;
+    }
+
+    /* Lesson reader */
+    .reader {
+      padding: 8px 16px calc(32px + var(--safe-bottom));
+    }
+    .reader .md {
+      font-size: 1rem;
+    }
+    .reader .md h1 {
+      font-size: 1.35rem;
+      margin: 0 0 16px;
+      line-height: 1.3;
+    }
+    .reader .md h2 {
+      font-size: 1.15rem;
+      margin: 28px 0 10px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid var(--border);
+      color: #c5d4eb;
+    }
+    .reader .md h3 {
+      font-size: 1.02rem;
+      margin: 20px 0 8px;
+    }
+    .reader .md p { margin: 0 0 12px; }
+    .reader .md ul, .reader .md ol {
+      margin: 0 0 14px 1.2em;
+    }
+    .reader .md li { margin-bottom: 6px; }
+    .reader .md a { color: var(--accent); }
+    .reader .md table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 12px 0 16px;
+      font-size: 0.9rem;
+      display: block;
+      overflow-x: auto;
+    }
+    .reader .md th, .reader .md td {
+      border: 1px solid var(--border);
+      padding: 8px 10px;
+      text-align: left;
+    }
+    .reader .md th { background: var(--surface2); }
+    .reader .md code {
+      background: var(--surface2);
+      padding: 2px 6px;
+      border-radius: 5px;
+      font-size: 0.88em;
+      font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    }
+    .reader .md pre {
+      background: #0d1524;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px;
+      overflow-x: auto;
+      margin: 0 0 16px;
+      -webkit-overflow-scrolling: touch;
+    }
+    .reader .md pre code {
+      background: none;
+      padding: 0;
+      font-size: 0.84rem;
+      line-height: 1.5;
+      color: #d6e4ff;
+    }
+    .reader .md hr {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 24px 0;
+    }
+    .reader .md blockquote {
+      border-left: 3px solid var(--accent);
+      margin: 0 0 14px;
+      padding: 4px 0 4px 14px;
+      color: var(--muted);
+    }
+
+    .nav-lessons {
+      display: flex;
+      gap: 10px;
+      margin-top: 28px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+    }
+    .nav-lessons button {
+      flex: 1;
+      padding: 14px 12px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text);
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .nav-lessons button:active { background: var(--surface2); }
+    .nav-lessons button:disabled {
+      opacity: 0.35;
+      cursor: default;
+    }
+    .nav-lessons .primary {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+    }
+
+    .loading, .error {
+      text-align: center;
+      padding: 48px 20px;
+      color: var(--muted);
+    }
+    .error { color: #f87171; }
+
+    .footer-note {
+      text-align: center;
+      padding: 8px 16px 20px;
+      font-size: 0.75rem;
       color: var(--muted);
     }
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <header>
-      <h1>Курс программирования</h1>
-      <p>С нуля · 7 направлений · 168 уроков</p>
-      <div class="badge">Всё готово</div>
-    </header>
-
-    <div class="hint">
-      <strong>С чего начать?</strong><br>
-      Новичкам — Python или JavaScript.<br>
-      Хотите сайты — Веб → JS → PHP → SQL.
+  <div class="app">
+    <div class="topbar">
+      <button class="btn-icon hidden" id="btnBack" type="button" aria-label="Назад">←</button>
+      <h1 id="title">Курсы</h1>
     </div>
 
-    <div class="grid">
-      <a class="course py" href="https://github.com/Rahimov98/programing_course/blob/main/python/README.md">
-        <div class="icon">Py</div>
-        <div class="info">
-          <h2>Python</h2>
-          <span>24 урока · с нуля до проектов</span>
+    <!-- HOME -->
+    <div class="screen active" id="screen-home">
+      <div class="content">
+        <div class="hero">
+          <h2>Программирование с нуля</h2>
+          <p>7 направлений · 168 уроков</p>
+          <div class="pill">Всё готово</div>
         </div>
-        <div class="arrow">→</div>
-      </a>
-
-      <a class="course js" href="https://github.com/Rahimov98/programing_course/blob/main/javascript/README.md">
-        <div class="icon">JS</div>
-        <div class="info">
-          <h2>JavaScript</h2>
-          <span>24 урока · язык веба</span>
+        <div class="tip">
+          <strong>С чего начать?</strong><br>
+          Новичкам — Python или JavaScript.<br>
+          Сайты — HTML/CSS → JS → PHP → SQL.
         </div>
-        <div class="arrow">→</div>
-      </a>
-
-      <a class="course web" href="https://github.com/Rahimov98/programing_course/blob/main/web/README.md">
-        <div class="icon">Web</div>
-        <div class="info">
-          <h2>HTML &amp; CSS</h2>
-          <span>24 урока · вёрстка и сайты</span>
-        </div>
-        <div class="arrow">→</div>
-      </a>
-
-      <a class="course php" href="https://github.com/Rahimov98/programing_course/blob/main/php/README.md">
-        <div class="icon">PHP</div>
-        <div class="info">
-          <h2>PHP</h2>
-          <span>24 урока · сервер и бэкенд</span>
-        </div>
-        <div class="arrow">→</div>
-      </a>
-
-      <a class="course sql" href="https://github.com/Rahimov98/programing_course/blob/main/sql/README.md">
-        <div class="icon">SQL</div>
-        <div class="info">
-          <h2>SQL</h2>
-          <span>24 урока · базы данных</span>
-        </div>
-        <div class="arrow">→</div>
-      </a>
-
-      <a class="course cs" href="https://github.com/Rahimov98/programing_course/blob/main/csharp/README.md">
-        <div class="icon">C#</div>
-        <div class="info">
-          <h2>C#</h2>
-          <span>24 урока · .NET и приложения</span>
-        </div>
-        <div class="arrow">→</div>
-      </a>
-
-      <a class="course cpp" href="https://github.com/Rahimov98/programing_course/blob/main/cpp/README.md">
-        <div class="icon">C++</div>
-        <div class="info">
-          <h2>C++</h2>
-          <span>24 урока · основа основ</span>
-        </div>
-        <div class="arrow">→</div>
-      </a>
+        <div class="course-list" id="courseList"></div>
+        <p class="footer-note">Открытый курс · MIT</p>
+      </div>
     </div>
 
-    <footer>
-      Открытый курс · MIT License
-    </footer>
+    <!-- LESSONS -->
+    <div class="screen" id="screen-lessons">
+      <div class="content">
+        <div class="lesson-list" id="lessonList"></div>
+      </div>
+    </div>
+
+    <!-- READER -->
+    <div class="screen" id="screen-reader">
+      <div class="reader">
+        <div id="lessonBody" class="md"></div>
+        <div class="nav-lessons">
+          <button type="button" id="btnPrev">← Назад</button>
+          <button type="button" class="primary" id="btnNext">Далее →</button>
+        </div>
+      </div>
+    </div>
   </div>
+
+  <script>
+    const COURSES = [
+      {
+        id: "python",
+        name: "Python",
+        short: "Py",
+        cls: "c-py",
+        desc: "24 урока · с нуля до проектов",
+        lessons: [
+          "Введение, установка, первая программа",
+          "Переменные и типы данных",
+          "Ввод, вывод, f-строки",
+          "Операторы",
+          "Условия: if/elif/else",
+          "Циклы: for и while",
+          "Строки",
+          "Списки и кортежи",
+          "Словари и множества",
+          "Функции",
+          "Модули и пакеты",
+          "Работа с файлами",
+          "Обработка ошибок",
+          "ООП: классы и объекты",
+          "Наследование и полиморфизм",
+          "Работа с датой и временем",
+          "Регулярные выражения",
+          "Виртуальные окружения и pip",
+          "HTTP-запросы (requests)",
+          "JSON и API",
+          "SQLite в Python",
+          "Парсинг HTML",
+          "Основы тестирования",
+          "Итоговый проект"
+        ]
+      },
+      {
+        id: "javascript",
+        name: "JavaScript",
+        short: "JS",
+        cls: "c-js",
+        desc: "24 урока · язык веба",
+        lessons: [
+          "Введение и среда",
+          "Переменные и типы",
+          "Операторы",
+          "Условия",
+          "Циклы",
+          "Функции",
+          "Массивы",
+          "Объекты",
+          "Строки",
+          "DOM: выбор элементов",
+          "События",
+          "Манипуляции с DOM",
+          "Формы и ввод",
+          "LocalStorage",
+          "Асинхронность: callbacks",
+          "Promises и async/await",
+          "Fetch API",
+          "Модули ES6",
+          "Классы",
+          "Обработка ошибок",
+          "Таймеры и анимация",
+          "Работа с JSON",
+          "Практика: мини-приложение",
+          "Итоговый проект"
+        ]
+      },
+      {
+        id: "web",
+        name: "HTML & CSS",
+        short: "Web",
+        cls: "c-web",
+        desc: "24 урока · вёрстка и сайты",
+        lessons: [
+          "Как работает веб, инструменты",
+          "HTML: структура страницы",
+          "Текст, ссылки, изображения",
+          "Списки и таблицы",
+          "Формы",
+          "Семантическая вёрстка",
+          "CSS: подключение и селекторы",
+          "Цвета, шрифты, текст",
+          "Блочная модель",
+          "Позиционирование",
+          "Flexbox",
+          "Grid",
+          "Адаптивность и media queries",
+          "Переходы и анимации",
+          "Псевдоклассы и псевдоэлементы",
+          "CSS-переменные и организация кода",
+          "Git и GitHub Pages",
+          "Основы JS для веба",
+          "Bootstrap и Tailwind",
+          "SEO и доступность",
+          "Производительность и оптимизация",
+          "HTTP и DevTools",
+          "Публикация и хостинг",
+          "Итоговый проект: сайт-портфолио"
+        ]
+      },
+      {
+        id: "php",
+        name: "PHP",
+        short: "PHP",
+        cls: "c-php",
+        desc: "24 урока · сервер и бэкенд",
+        lessons: [
+          "Введение, локальный сервер, Hello World",
+          "Переменные и типы данных",
+          "Операторы",
+          "Условия",
+          "Циклы",
+          "Функции",
+          "Массивы",
+          "Строки",
+          "Формы: GET и POST",
+          "Валидация данных формы",
+          "Работа с файлами",
+          "Загрузка файлов",
+          "Сессии",
+          "Cookies",
+          "ООП: классы и объекты",
+          "Наследование, интерфейсы, трейты",
+          "Подключение файлов и структура проекта",
+          "MySQL и PDO: подключение",
+          "CRUD-операции",
+          "Аутентификация: регистрация и вход",
+          "Безопасность: XSS, CSRF, SQL-инъекции",
+          "JSON и API",
+          "Основы MVC",
+          "Итоговый проект: мини-блог"
+        ]
+      },
+      {
+        id: "sql",
+        name: "SQL",
+        short: "SQL",
+        cls: "c-sql",
+        desc: "24 урока · базы данных",
+        lessons: [
+          "Введение в базы данных",
+          "CREATE TABLE и типы данных",
+          "INSERT: добавление данных",
+          "SELECT: выборка данных",
+          "WHERE: фильтрация",
+          "ORDER BY и LIMIT",
+          "Агрегатные функции",
+          "GROUP BY и HAVING",
+          "UPDATE и DELETE",
+          "Ключи и ограничения",
+          "Связи между таблицами",
+          "INNER JOIN",
+          "LEFT и RIGHT JOIN",
+          "Подзапросы",
+          "Строковые функции и функции даты",
+          "CASE и NULL",
+          "UNION",
+          "Индексы",
+          "Представления (VIEW)",
+          "Транзакции",
+          "Хранимые процедуры и триггеры",
+          "Нормализация",
+          "Проектирование БД (ER-диаграммы)",
+          "Итоговый проект: база интернет-магазина"
+        ]
+      },
+      {
+        id: "csharp",
+        name: "C#",
+        short: "C#",
+        cls: "c-cs",
+        desc: "24 урока · .NET и приложения",
+        lessons: [
+          "Введение, .NET SDK, Hello World",
+          "Переменные и типы данных",
+          "Ввод и вывод в консоли",
+          "Операторы",
+          "Условия: if/else и switch",
+          "Циклы",
+          "Методы",
+          "Массивы",
+          "Строки",
+          "Коллекции: List и Dictionary",
+          "Классы и объекты",
+          "Свойства и конструкторы",
+          "Наследование",
+          "Полиморфизм и абстрактные классы",
+          "Интерфейсы",
+          "Обобщения (generics)",
+          "Обработка исключений",
+          "Работа с файлами",
+          "LINQ",
+          "Делегаты, события, лямбды",
+          "async/await",
+          "Windows Forms: основы",
+          "Работа с базой данных (SQLite)",
+          "Итоговый проект: менеджер задач"
+        ]
+      },
+      {
+        id: "cpp",
+        name: "C++",
+        short: "C++",
+        cls: "c-cpp",
+        desc: "24 урока · основа основ",
+        lessons: [
+          "Введение и первая программа",
+          "Переменные и типы",
+          "Ввод и вывод",
+          "Операторы",
+          "Условия",
+          "Циклы",
+          "Массивы",
+          "Строки",
+          "Функции",
+          "Указатели и ссылки",
+          "Структуры",
+          "Классы и объекты",
+          "Конструкторы и деструкторы",
+          "Наследование",
+          "Полиморфизм",
+          "Шаблоны",
+          "STL: vector и string",
+          "STL: map и set",
+          "Работа с файлами",
+          "Исключения",
+          "Умные указатели",
+          "Многопоточность (обзор)",
+          "Практика: консольное приложение",
+          "Итоговый проект"
+        ]
+      }
+    ];
+
+    let currentCourse = null;
+    let currentLesson = 0;
+
+    const $ = (id) => document.getElementById(id);
+    const titleEl = $("title");
+    const btnBack = $("btnBack");
+
+    function showScreen(name) {
+      document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
+      $("screen-" + name).classList.add("active");
+      window.scrollTo(0, 0);
+    }
+
+    function renderHome() {
+      titleEl.textContent = "Курсы";
+      btnBack.classList.add("hidden");
+      const list = $("courseList");
+      list.innerHTML = COURSES.map(c => `
+        <button type="button" class="course-card ${c.cls}" data-id="${c.id}">
+          <div class="course-icon">${c.short}</div>
+          <div>
+            <h3>${c.name}</h3>
+            <span>${c.desc}</span>
+          </div>
+          <div class="chev">›</div>
+        </button>
+      `).join("");
+      list.querySelectorAll(".course-card").forEach(btn => {
+        btn.addEventListener("click", () => openCourse(btn.dataset.id));
+      });
+      showScreen("home");
+    }
+
+    function openCourse(id) {
+      currentCourse = COURSES.find(c => c.id === id);
+      if (!currentCourse) return;
+      titleEl.textContent = currentCourse.name;
+      btnBack.classList.remove("hidden");
+      btnBack.onclick = renderHome;
+
+      const list = $("lessonList");
+      list.innerHTML = currentCourse.lessons.map((title, i) => `
+        <button type="button" class="lesson-item" data-n="${i}">
+          <div class="lesson-num">${i + 1}</div>
+          <h3>${title}</h3>
+        </button>
+      `).join("");
+      list.querySelectorAll(".lesson-item").forEach(btn => {
+        btn.addEventListener("click", () => openLesson(+btn.dataset.n));
+      });
+      showScreen("lessons");
+    }
+
+    async function openLesson(n) {
+      currentLesson = n;
+      const course = currentCourse;
+      const num = String(n + 1).padStart(2, "0");
+      const path = `${course.id}/lesson-${num}.md`;
+
+      titleEl.textContent = `${course.name} · ${n + 1}`;
+      btnBack.classList.remove("hidden");
+      btnBack.onclick = () => openCourse(course.id);
+
+      const body = $("lessonBody");
+      body.innerHTML = `<div class="loading">Загрузка урока…</div>`;
+      showScreen("reader");
+
+      $("btnPrev").disabled = n <= 0;
+      $("btnNext").disabled = n >= course.lessons.length - 1;
+      $("btnPrev").onclick = () => openLesson(n - 1);
+      $("btnNext").onclick = () => openLesson(n + 1);
+
+      try {
+        const res = await fetch(path);
+        if (!res.ok) throw new Error("Не найден: " + path);
+        let md = await res.text();
+        // Убираем навигационные ссылки внизу урока — у нас свои кнопки
+        md = md.replace(/\n---\n[\s\S]*$/m, "\n");
+        body.innerHTML = marked.parse(md);
+      } catch (e) {
+        body.innerHTML = `<div class="error">Не удалось загрузить урок.<br><small>${e.message}</small></div>`;
+      }
+    }
+
+    renderHome();
+  </script>
 </body>
 </html>
