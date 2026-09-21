@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Курс программирования с нуля</title>
+  <meta name="description" content="7 направлений × 24 урока = 168 уроков. Python, JavaScript, C#, C++, PHP, SQL, HTML/CSS.">
+  <style>
+    :root {
+      --bg: #0f1419;
+      --card: #1a2332;
+      --card-hover: #243044;
+      --text: #e7ecf3;
+      --muted: #8b9bb4;
+      --accent: #3b82f6;
+      --accent2: #22c55e;
+      --border: #2a3548;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      min-height: 100vh;
+      padding: 16px;
+      padding-bottom: 48px;
+    }
+    .wrap {
+      max-width: 480px;
+      margin: 0 auto;
+    }
+    header {
+      text-align: center;
+      padding: 28px 8px 20px;
+    }
+    header h1 {
+      font-size: 1.55rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+    header p {
+      color: var(--muted);
+      margin-top: 8px;
+      font-size: 0.95rem;
+    }
+    .badge {
+      display: inline-block;
+      margin-top: 12px;
+      background: #14532d;
+      color: #86efac;
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: 999px;
+    }
+    .hint {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px 16px;
+      margin-bottom: 20px;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+    .hint strong { color: var(--text); }
+    .grid {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    a.course {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 16px;
+      text-decoration: none;
+      color: inherit;
+      transition: background 0.15s, transform 0.15s;
+      -webkit-tap-highlight-color: transparent;
+    }
+    a.course:active {
+      background: var(--card-hover);
+      transform: scale(0.98);
+    }
+    .icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    .info { flex: 1; min-width: 0; }
+    .info h2 {
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+    .info span {
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+    .arrow {
+      color: var(--muted);
+      font-size: 1.2rem;
+    }
+    .py .icon { background: #1e3a5f; color: #60a5fa; }
+    .js .icon { background: #3d3a1a; color: #facc15; }
+    .web .icon { background: #3b1f1f; color: #f87171; }
+    .php .icon { background: #2e1a4a; color: #c084fc; }
+    .sql .icon { background: #1a3d3a; color: #2dd4bf; }
+    .cs .icon { background: #1a2e1a; color: #4ade80; }
+    .cpp .icon { background: #1a2a4a; color: #93c5fd; }
+    footer {
+      text-align: center;
+      margin-top: 32px;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <h1>Курс программирования</h1>
+      <p>С нуля · 7 направлений · 168 уроков</p>
+      <div class="badge">Всё готово</div>
+    </header>
+
+    <div class="hint">
+      <strong>С чего начать?</strong><br>
+      Новичкам — Python или JavaScript.<br>
+      Хотите сайты — Веб → JS → PHP → SQL.
+    </div>
+
+    <div class="grid">
+      <a class="course py" href="https://github.com/Rahimov98/programing_course/blob/main/python/README.md">
+        <div class="icon">Py</div>
+        <div class="info">
+          <h2>Python</h2>
+          <span>24 урока · с нуля до проектов</span>
+        </div>
+        <div class="arrow">→</div>
+      </a>
+
+      <a class="course js" href="https://github.com/Rahimov98/programing_course/blob/main/javascript/README.md">
+        <div class="icon">JS</div>
+        <div class="info">
+          <h2>JavaScript</h2>
+          <span>24 урока · язык веба</span>
+        </div>
+        <div class="arrow">→</div>
+      </a>
+
+      <a class="course web" href="https://github.com/Rahimov98/programing_course/blob/main/web/README.md">
+        <div class="icon">Web</div>
+        <div class="info">
+          <h2>HTML &amp; CSS</h2>
+          <span>24 урока · вёрстка и сайты</span>
+        </div>
+        <div class="arrow">→</div>
+      </a>
+
+      <a class="course php" href="https://github.com/Rahimov98/programing_course/blob/main/php/README.md">
+        <div class="icon">PHP</div>
+        <div class="info">
+          <h2>PHP</h2>
+          <span>24 урока · сервер и бэкенд</span>
+        </div>
+        <div class="arrow">→</div>
+      </a>
+
+      <a class="course sql" href="https://github.com/Rahimov98/programing_course/blob/main/sql/README.md">
+        <div class="icon">SQL</div>
+        <div class="info">
+          <h2>SQL</h2>
+          <span>24 урока · базы данных</span>
+        </div>
+        <div class="arrow">→</div>
+      </a>
+
+      <a class="course cs" href="https://github.com/Rahimov98/programing_course/blob/main/csharp/README.md">
+        <div class="icon">C#</div>
+        <div class="info">
+          <h2>C#</h2>
+          <span>24 урока · .NET и приложения</span>
+        </div>
+        <div class="arrow">→</div>
+      </a>
+
+      <a class="course cpp" href="https://github.com/Rahimov98/programing_course/blob/main/cpp/README.md">
+        <div class="icon">C++</div>
+        <div class="info">
+          <h2>C++</h2>
+          <span>24 урока · основа основ</span>
+        </div>
+        <div class="arrow">→</div>
+      </a>
+    </div>
+
+    <footer>
+      Открытый курс · MIT License
+    </footer>
+  </div>
+</body>
+</html>
